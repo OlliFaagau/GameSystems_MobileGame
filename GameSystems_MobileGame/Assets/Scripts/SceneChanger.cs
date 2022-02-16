@@ -7,6 +7,7 @@ public class SceneChanger : MonoBehaviour
 {
     public void MainMenu()
     {
+        GameManager.playerNum = 0;
         SceneManager.LoadScene("MainMenu");
     }
 
