@@ -1118,7 +1118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  mapWidth: 20
+  mapWidth: 2.5
   health: 100
   healthBar: {fileID: 1031028253}
 --- !u!212 &299822367

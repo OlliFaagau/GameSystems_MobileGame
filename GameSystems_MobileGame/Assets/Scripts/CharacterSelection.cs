@@ -74,6 +74,7 @@ public class CharacterSelection : MonoBehaviour
     public void ResetButtons()
     {
         GameManager.playerNum = 0;
+        playerTracker = 0;
         foreach (Button b in charButtons)
         {
             b.enabled = true;
