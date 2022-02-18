@@ -254,7 +254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &73598130
 RectTransform:
   m_ObjectHideFlags: 0
@@ -926,7 +926,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &265950666
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1247,7 +1247,7 @@ GameObject:
   - component: {fileID: 363337600}
   - component: {fileID: 363337599}
   m_Layer: 5
-  m_Name: PlayerImage
+  m_Name: PlayerImage1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2216,7 +2216,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.120010376, y: 2.249977}
+  m_AnchoredPosition: {x: 0.120010376, y: -8}
   m_SizeDelta: {x: 694.33, y: 80.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &655989169
@@ -3043,7 +3043,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1046710518
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3077,7 +3077,7 @@ GameObject:
   - component: {fileID: 1079263226}
   - component: {fileID: 1079263225}
   m_Layer: 5
-  m_Name: PlayerImage
+  m_Name: PlayerImage2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3287,7 +3287,7 @@ GameObject:
   - component: {fileID: 1106203197}
   - component: {fileID: 1106203196}
   m_Layer: 5
-  m_Name: PlayerImage
+  m_Name: PlayerImage4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3814,8 +3814,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 28}
-  m_SizeDelta: {x: 185, y: 100}
+  m_AnchoredPosition: {x: 100, y: 28}
+  m_SizeDelta: {x: 75, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1208317876
 MonoBehaviour:
@@ -3839,7 +3839,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3f2d894fcbbce084ab52f92704abf495, type: 3}
-    m_FontSize: 35
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -4215,6 +4215,11 @@ MonoBehaviour:
   player: {fileID: 299822366}
   GameOverPanel: {fileID: 92255184}
   leaderBoard: {fileID: 1479459648}
+  playerIcons:
+  - {fileID: 363337599}
+  - {fileID: 1079263225}
+  - {fileID: 1531459150}
+  - {fileID: 1106203196}
 --- !u!1 &1409304224
 GameObject:
   m_ObjectHideFlags: 0
@@ -4712,7 +4717,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 294.8, y: 43.000053}
+  m_AnchoredPosition: {x: 350, y: 43.000053}
   m_SizeDelta: {x: 137.66, y: 57.06}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1513392301
@@ -4824,7 +4829,7 @@ GameObject:
   - component: {fileID: 1531459151}
   - component: {fileID: 1531459150}
   m_Layer: 5
-  m_Name: PlayerImage
+  m_Name: PlayerImage3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4903,7 +4908,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1552874945
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5127,7 +5132,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 294.8, y: 45.89003}
+  m_AnchoredPosition: {x: 350, y: 45.89003}
   m_SizeDelta: {x: 137.66, y: 57.06}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1598414864
@@ -5399,7 +5404,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 294.8, y: 43.970047}
+  m_AnchoredPosition: {x: 350, y: 43.970047}
   m_SizeDelta: {x: 137.66, y: 57.06}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1611519735
@@ -5958,8 +5963,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -43}
-  m_SizeDelta: {x: 185, y: 100}
+  m_AnchoredPosition: {x: 100, y: -43}
+  m_SizeDelta: {x: 75, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1791936602
 MonoBehaviour:
@@ -5983,7 +5988,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3f2d894fcbbce084ab52f92704abf495, type: 3}
-    m_FontSize: 35
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -6304,7 +6309,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 294.8, y: 38}
+  m_AnchoredPosition: {x: 350, y: 38}
   m_SizeDelta: {x: 137.66, y: 57.06}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1960977811
@@ -6439,8 +6444,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 112}
-  m_SizeDelta: {x: 185, y: 100}
+  m_AnchoredPosition: {x: 100, y: 112}
+  m_SizeDelta: {x: 75, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1970809446
 MonoBehaviour:
@@ -6464,7 +6469,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3f2d894fcbbce084ab52f92704abf495, type: 3}
-    m_FontSize: 35
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -6623,8 +6628,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 179}
-  m_SizeDelta: {x: 185, y: 100}
+  m_AnchoredPosition: {x: 100, y: 179}
+  m_SizeDelta: {x: 75, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2031027435
 MonoBehaviour:
@@ -6648,7 +6653,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 3f2d894fcbbce084ab52f92704abf495, type: 3}
-    m_FontSize: 35
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0

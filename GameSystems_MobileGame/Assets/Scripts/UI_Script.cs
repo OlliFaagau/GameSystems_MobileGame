@@ -16,6 +16,7 @@ public class UI_Script : MonoBehaviour
     public DodgeMovement player;
     public GameObject GameOverPanel;
     public GameObject leaderBoard;
+    public Image[] playerIcons;
 
     static public int numOfPlays = GameManager.playerNum;
 
@@ -27,6 +28,11 @@ public class UI_Script : MonoBehaviour
         leaderBoard.SetActive(false);
         playingPlayer.text = $"Player {(GameManager.playerNum - numOfPlays) + 1}";
         playingPlayer.color = GameManager.colors[GameManager.playerNum - numOfPlays];
+   
+        foreach(Image image in playerIcons)
+        {
+            image.enabled = false;
+        }
     }
 
     void Update()
@@ -90,7 +96,7 @@ public class UI_Script : MonoBehaviour
 
             foreach (KeyValuePair<string, int> place in newList)
             {
-                placements[i].text = place.Key + ": " + place.Value;
+                placements[i].text =  "" + place.Value;
                 i++;
             }
         }
@@ -110,6 +116,10 @@ public class UI_Script : MonoBehaviour
 
             foreach (KeyValuePair<int, int> place in newList)
             {
+                playerIcons[i].enabled = true;
+                playerIcons[i].sprite = GameManager.sprites[place.Key];
+                playerIcons[i].color = GameManager.colors[place.Key];
+
                 switch (i)
                 {
                     case 0:
