@@ -3226,7 +3226,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1394680121}
-        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_TargetAssemblyTypeName: ManageScenes, Assembly-CSharp
         m_MethodName: Board
         m_Mode: 1
         m_Arguments:
@@ -4172,7 +4172,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1394680120}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abab50509e7e08648921a7e5a593a39e, type: 3}
+  m_Script: {fileID: 11500000, guid: 49dded4570e9b264488fe7dc40ee4157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1394680122
@@ -4448,7 +4448,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1479459649
 RectTransform:
   m_ObjectHideFlags: 0

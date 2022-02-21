@@ -28,7 +28,7 @@ public class UI_Script : MonoBehaviour
         leaderBoard.SetActive(false);
         playingPlayer.text = $"Player {(GameManager.playerNum - numOfPlays) + 1}";
         playingPlayer.color = GameManager.colors[GameManager.playerNum - numOfPlays];
-   
+
         foreach(Image image in playerIcons)
         {
             image.enabled = false;
@@ -74,7 +74,6 @@ public class UI_Script : MonoBehaviour
         {
             if (player.health < 0)
             {
-                DisplayScores();
                 DisplayOrders();
                 GameOverPanel.SetActive(false);
                 leaderBoard.SetActive(true);
@@ -82,30 +81,11 @@ public class UI_Script : MonoBehaviour
             }
         }
     }
-    void DisplayScores()
-    {
-        int i = 0;
-        if(GameManager.scores.Count >= 0)
-        {
-            List<KeyValuePair<string, int>> newList = new List<KeyValuePair<string, int>>(GameManager.scores);
-            newList.Sort(delegate(KeyValuePair<string, int> place1, KeyValuePair<string, int>place2) {
-                return place2.Value.CompareTo(place1.Value);
-            });
-        
-            GameManager.scores.Clear();
-
-            foreach (KeyValuePair<string, int> place in newList)
-            {
-                placements[i].text =  "" + place.Value;
-                i++;
-            }
-        }
-    }
 
     void DisplayOrders()
     {
         int i = 0;
-        if (GameManager.scores.Count >= 0)
+        if (GameManager.orders.Count >= 0)
         {
             List<KeyValuePair<int, int>> newList = new List<KeyValuePair<int, int>>(GameManager.orders);
             newList.Sort(delegate (KeyValuePair<int, int> place1, KeyValuePair<int, int> place2) {
@@ -120,16 +100,21 @@ public class UI_Script : MonoBehaviour
                 playerIcons[i].sprite = GameManager.sprites[place.Key];
                 playerIcons[i].color = GameManager.colors[place.Key];
 
+                placements[i].text = "" + place.Value;
+
                 switch (i)
                 {
                     case 0:
-                        //player moves 3 spaces
+                        GameManager.movePlayers[place.Key].y = GameManager.movePlayers[place.Key].y + 4;
                         break;
                     case 1:
-                        //player moves 2 spaces
+                        GameManager.movePlayers[place.Key].y = GameManager.movePlayers[place.Key].y + 3;
                         break;
                     case 2:
-                        //player moves 1 space
+                        GameManager.movePlayers[place.Key].y = GameManager.movePlayers[place.Key].y + 2;
+                        break;
+                    case 3:
+                        GameManager.movePlayers[place.Key].y = GameManager.movePlayers[place.Key].y + 1;
                         break;
                 }
 
@@ -140,7 +125,6 @@ public class UI_Script : MonoBehaviour
     }
     public void Replay()
     {
-        GameManager.scores.Add($"Player {(GameManager.playerNum - numOfPlays) + 1}", (int)time);
         GameManager.orders.Add(GameManager.playerNum - numOfPlays, (int)time);
 
         numOfPlays--;
@@ -153,6 +137,7 @@ public class UI_Script : MonoBehaviour
         {
             GetLeaderBoard();
             numOfPlays = GameManager.playerNum;
+            GameManager.roundNum++;
         }
     }
 }

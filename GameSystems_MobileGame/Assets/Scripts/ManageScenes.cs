@@ -17,6 +17,7 @@ public class ManageScenes : MonoBehaviour
 
     static public void MainMenu()
     {
+        GameManager.playerNum = 0;
         SceneManager.LoadScene("MainMenu");
     }
 
