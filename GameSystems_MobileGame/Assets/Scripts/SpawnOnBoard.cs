@@ -11,18 +11,18 @@ public class SpawnOnBoard : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         numOfPlayers = GameManager.playerNum;
         roundText.text = "Round " + GameManager.roundNum;
         SetBoard();
-        Debug.Log("Player Num: " + numOfPlayers);
     }
 
     void Update()
-    {  
+    {
         for (int i = 0; i < numOfPlayers; i++)
         {
             if(GameManager.movePlayers[i].y > 0)
-                players[i].transform.position = GameManager.movePlayers[i];
+                players[i].transform.position = Vector2.Lerp(players[i].transform.position, GameManager.movePlayers[i], Time.deltaTime);
         }
        
     }
