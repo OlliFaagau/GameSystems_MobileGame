@@ -14,6 +14,7 @@ public class SpawnOnBoard : MonoBehaviour
         numOfPlayers = GameManager.playerNum;
         roundText.text = "Round " + GameManager.roundNum;
         SetBoard();
+        Debug.Log("Player Num: " + numOfPlayers);
     }
 
     void Update()

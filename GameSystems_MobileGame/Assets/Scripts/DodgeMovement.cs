@@ -15,6 +15,11 @@ public class DodgeMovement : MonoBehaviour
     Color color;
     void Start()
     {
+        if (UI_Script.numOfPlays != GameManager.playerNum && UI_Script.clickCounter == 0)
+        {
+            UI_Script.numOfPlays = GameManager.playerNum;
+        }
+
         sprite = GameManager.sprites[GameManager.playerNum - UI_Script.numOfPlays];
         color = GameManager.colors[GameManager.playerNum - UI_Script.numOfPlays];
         rb = GetComponent<Rigidbody2D>();

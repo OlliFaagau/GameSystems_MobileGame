@@ -19,10 +19,16 @@ public class UI_Script : MonoBehaviour
     public Image[] playerIcons;
 
     static public int numOfPlays = GameManager.playerNum;
+    static public int clickCounter = 0;
 
     void Start()
     {
         UnPause();
+        if(numOfPlays != GameManager.playerNum && clickCounter == 0)
+        {
+            numOfPlays = GameManager.playerNum;
+        }
+
         timeText.text = $"{(int)timeLeft}";
         GameOverPanel.SetActive(false);
         leaderBoard.SetActive(false);
@@ -128,6 +134,7 @@ public class UI_Script : MonoBehaviour
         GameManager.orders.Add(GameManager.playerNum - numOfPlays, (int)time);
 
         numOfPlays--;
+        clickCounter++;
 
         if (numOfPlays > 0)
         {
@@ -137,6 +144,7 @@ public class UI_Script : MonoBehaviour
         {
             GetLeaderBoard();
             numOfPlays = GameManager.playerNum;
+            clickCounter = 0;
             GameManager.roundNum++;
         }
     }
