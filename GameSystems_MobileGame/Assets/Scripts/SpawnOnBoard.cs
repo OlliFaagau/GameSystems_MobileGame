@@ -8,7 +8,7 @@ public class SpawnOnBoard : MonoBehaviour
     public GameObject[] players;
     public LineRenderer[] lines;
     public GameObject winnerPanel;
-    public GameObject winner;
+    public Image winner;
     public Button playButton;
     public Text roundText;
     public Text winningText;
@@ -64,7 +64,8 @@ public class SpawnOnBoard : MonoBehaviour
     {
         winnerPanel.SetActive(true);
         winningText.text = $"Player {playerIndex + 1} wins!";
-        winner.GetComponent<SpriteRenderer>().sprite = players[playerIndex].GetComponent<SpriteRenderer>().sprite;
+        winner.sprite = players[playerIndex].GetComponent<SpriteRenderer>().sprite;
+        winner.color = players[playerIndex].GetComponent<SpriteRenderer>().color;
         playButton.enabled = false;
     }
 
