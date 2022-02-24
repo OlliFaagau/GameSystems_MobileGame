@@ -1502,6 +1502,8 @@ MonoBehaviour:
   - {fileID: 5307332851641018238}
   - {fileID: 5307332850862688015}
   winnerPanel: {fileID: 703856396}
+  realBoard: {fileID: 403871345}
+  canvasBoard: {fileID: 2032439736}
   winner: {fileID: 1318636937}
   playButton: {fileID: 1343813923}
   roundText: {fileID: 415188162}
@@ -1602,6 +1604,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 571070497}
+        m_TargetAssemblyTypeName: SpawnOnBoard, Assembly-CSharp
+        m_MethodName: ResetBoard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 571070498}
         m_TargetAssemblyTypeName: ManageScenes, Assembly-CSharp
         m_MethodName: Board
@@ -1707,7 +1721,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &703856397
 RectTransform:
   m_ObjectHideFlags: 0

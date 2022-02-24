@@ -8,19 +8,26 @@ public class SpawnOnBoard : MonoBehaviour
     public GameObject[] players;
     public LineRenderer[] lines;
     public GameObject winnerPanel;
+    public GameObject realBoard;
+    public GameObject canvasBoard;
     public Image winner;
     public Button playButton;
     public Text roundText;
     public Text winningText;
+
     private int numOfPlayers;
+    private int victor;
 
     void Start()
     {
         Time.timeScale = 1;
+        victor = 0;
         playButton.enabled = true;
         winnerPanel.SetActive(false);
         numOfPlayers = GameManager.playerNum;
         roundText.text = "Round " + GameManager.roundNum;
+        realBoard.SetActive(true);
+        canvasBoard.SetActive(true);
         SetBoard();
     }
 
@@ -35,7 +42,7 @@ public class SpawnOnBoard : MonoBehaviour
             lines[i].startColor = players[i].GetComponent<SpriteRenderer>().color;
             lines[i].endColor = players[i].GetComponent<SpriteRenderer>().color;
 
-            if (players[i].transform.position.y >= 10)
+            if (players[i].transform.position.y >= 9.9 && victor == 0)
             {
                 SetWinnerPanel(i);
             }
@@ -66,7 +73,10 @@ public class SpawnOnBoard : MonoBehaviour
         winningText.text = $"Player {playerIndex + 1} wins!";
         winner.sprite = players[playerIndex].GetComponent<SpriteRenderer>().sprite;
         winner.color = players[playerIndex].GetComponent<SpriteRenderer>().color;
+        realBoard.SetActive(false);
+        canvasBoard.SetActive(false);
         playButton.enabled = false;
+        victor = 1;
     }
 
     public void ResetBoard()
