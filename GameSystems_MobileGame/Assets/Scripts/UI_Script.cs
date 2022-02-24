@@ -17,6 +17,7 @@ public class UI_Script : MonoBehaviour
     public DodgeMovement player;
     public GameObject GameOverPanel;
     public GameObject leaderBoard;
+    public GameObject blockPrefab;
     public Image[] playerIcons;
 
     static public int numOfPlays = GameManager.playerNum;
@@ -47,6 +48,11 @@ public class UI_Script : MonoBehaviour
         if (numOfPlays > 0)
         {
             GetGameOver();
+        }
+
+        if(timeLeft < 30)
+        {
+            blockPrefab.GetComponent<Rigidbody2D>().gravityScale = 0.8f;
         }
 
         timeLeft -= Time.deltaTime;
