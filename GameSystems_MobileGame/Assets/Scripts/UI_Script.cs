@@ -11,6 +11,7 @@ public class UI_Script : MonoBehaviour
     public float time = 0;
     public Text timeText;
     public Text scoreText;
+    public Text bonusText;
     public Text playingPlayer;
     public Text[] placements;
     public DodgeMovement player;
@@ -69,6 +70,7 @@ public class UI_Script : MonoBehaviour
             {
                 GameOverPanel.SetActive(true);
                 scoreText.text = "Your time: " + (int)time;
+                bonusText.text = "Bonus: " + GameManager.bonusPoints[GameManager.playerNum - numOfPlays];
                 Pause();
             }
         }
@@ -131,7 +133,7 @@ public class UI_Script : MonoBehaviour
     }
     public void Replay()
     {
-        GameManager.orders.Add(GameManager.playerNum - numOfPlays, (int)time);
+        GameManager.orders.Add(GameManager.playerNum - numOfPlays, (int)time + GameManager.bonusPoints[GameManager.playerNum - numOfPlays]);
 
         numOfPlays--;
         clickCounter++;

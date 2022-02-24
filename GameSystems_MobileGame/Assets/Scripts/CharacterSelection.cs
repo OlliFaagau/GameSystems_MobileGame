@@ -89,20 +89,51 @@ public class CharacterSelection : MonoBehaviour
             case 0:
                 GameManager.sprites[playerTracker]= characterPrefabs[(int)sprite];
                 GameManager.colors[playerTracker] = color;
+                SetStats(sprite, playerTracker);
                 break;
             case 1:
                 GameManager.sprites[playerTracker] = characterPrefabs[(int)sprite];
                 GameManager.colors[playerTracker] = color;
+                SetStats(sprite, playerTracker);
                 break;
             case 2:
                 GameManager.sprites[playerTracker] = characterPrefabs[(int)sprite];
                 GameManager.colors[playerTracker] = color;
+                SetStats(sprite, playerTracker);
                 break;
             case 3:
                 GameManager.sprites[playerTracker] = characterPrefabs[(int)sprite];
                 GameManager.colors[playerTracker] = color;
+                SetStats(sprite, playerTracker);
                 break;
 
+        }
+    }
+
+    public void SetStats(Characters characters ,int tracker)
+    {
+        switch ((int)characters)
+        {
+            case 0:
+                GameManager.armorPoints[tracker] = 50;
+                GameManager.healthPoints[tracker] = 50;
+                GameManager.bonusPoints[tracker] = 5;
+                break;                                        
+            case 1:                                           
+                GameManager.armorPoints[tracker] = 30;
+                GameManager.healthPoints[tracker] = 90;
+                GameManager.bonusPoints[tracker] = 3;
+                break;                                       
+            case 2:                                          
+                GameManager.armorPoints[tracker] = 70;
+                GameManager.healthPoints[tracker] = 70;
+                GameManager.bonusPoints[tracker] = 1;
+                break;                                        
+            case 3:                                           
+                GameManager.armorPoints[tracker] = 100;
+                GameManager.healthPoints[tracker] = 30;
+                GameManager.bonusPoints[tracker] = 2;
+                break;
         }
     }
 

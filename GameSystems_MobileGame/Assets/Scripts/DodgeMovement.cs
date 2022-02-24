@@ -7,12 +7,15 @@ public class DodgeMovement : MonoBehaviour
 {
     public float speed = 15f;
     public float mapWidth = 2.5f;
-    public int health = 100;
+    public int health;
+    public int armor;
     public Slider healthBar;
+    public Slider armorBar;
 
     private Rigidbody2D rb;
     Sprite sprite;
     Color color;
+
     void Start()
     {
         if (UI_Script.numOfPlays != GameManager.playerNum && UI_Script.clickCounter == 0)
@@ -20,6 +23,8 @@ public class DodgeMovement : MonoBehaviour
             UI_Script.numOfPlays = GameManager.playerNum;
         }
 
+        health = GameManager.healthPoints[GameManager.playerNum - UI_Script.numOfPlays];
+        armor = GameManager.armorPoints[GameManager.playerNum - UI_Script.numOfPlays];
         sprite = GameManager.sprites[GameManager.playerNum - UI_Script.numOfPlays];
         color = GameManager.colors[GameManager.playerNum - UI_Script.numOfPlays];
         rb = GetComponent<Rigidbody2D>();
@@ -30,6 +35,7 @@ public class DodgeMovement : MonoBehaviour
     void FixedUpdate()
     {
         healthBar.value = health;
+        armorBar.value = armor;
 
         float x = Input.GetAxis("Horizontal") * Time.fixedDeltaTime * speed;
 
@@ -44,7 +50,10 @@ public class DodgeMovement : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Block"))
         {
-            health -= 25;
+            armor -= 25;
+
+            if(armor <= 0)
+                health -= 25;
         }
     }
 }
