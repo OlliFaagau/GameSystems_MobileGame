@@ -45,19 +45,26 @@ public class UI_Script : MonoBehaviour
 
     void Update()
     {
-        if (numOfPlays > 0)
-        {
-            GetGameOver();
-        }
-
-        if(timeLeft < 30)
-        {
-            blockPrefab.GetComponent<Rigidbody2D>().gravityScale = 0.8f;
-        }
-
         timeLeft -= Time.deltaTime;
         time += Time.deltaTime;
         timeText.text = $"{(int)timeLeft}";
+
+        if (numOfPlays > 0) 
+        {
+            GetGameOver();
+        }
+        if(timeLeft <= 0)
+        {
+            GameOver();
+        }
+
+        if (timeLeft < 40)
+        {
+            blockPrefab.GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+        }else if(timeLeft < 20)
+        {
+            blockPrefab.GetComponent<Rigidbody2D>().gravityScale = 1.5f;
+        }
     }
 
     public void Pause()
@@ -72,14 +79,19 @@ public class UI_Script : MonoBehaviour
     {
         if (GameOverPanel != null)
         {
-            if (player.health < 0)
+            if (player.health < 0) // show Game Over if player health hits 0
             {
-                GameOverPanel.SetActive(true);
-                scoreText.text = "Your time: " + (int)time;
-                bonusText.text = "Bonus: " + GameManager.bonusPoints[GameManager.playerNum - numOfPlays];
-                Pause();
+                GameOver();
             }
         }
+    }
+
+    void GameOver()
+    {
+        GameOverPanel.SetActive(true);
+        scoreText.text = "Your time: " + (int)time;
+        bonusText.text = "Bonus: " + GameManager.bonusPoints[GameManager.playerNum - numOfPlays];
+        Pause();
     }
 
     void GetLeaderBoard()

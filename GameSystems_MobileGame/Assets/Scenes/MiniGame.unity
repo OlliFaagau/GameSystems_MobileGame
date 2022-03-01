@@ -1026,7 +1026,6 @@ GameObject:
   - component: {fileID: 299822366}
   - component: {fileID: 299822369}
   - component: {fileID: 299822370}
-  - component: {fileID: 299822371}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1167,21 +1166,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &299822371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 299822365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 823936627b0b49348846a736160a0ce4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 2015767641}
-  speed: 0.01
-  startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &363337597
 GameObject:
   m_ObjectHideFlags: 0
@@ -4112,7 +4096,6 @@ GameObject:
   - component: {fileID: 1394680122}
   - component: {fileID: 1394680121}
   - component: {fileID: 1394680123}
-  - component: {fileID: 1394680124}
   m_Layer: 0
   m_Name: Scripts
   m_TagString: Untagged
@@ -4179,21 +4162,6 @@ MonoBehaviour:
   - {fileID: 1079263225}
   - {fileID: 1531459150}
   - {fileID: 1106203196}
---- !u!114 &1394680124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1394680120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 823936627b0b49348846a736160a0ce4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  speed: 0.01
-  startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &1409304224
 GameObject:
   m_ObjectHideFlags: 0
@@ -5977,7 +5945,7 @@ MonoBehaviour:
   - {fileID: 151936179}
   - {fileID: 807731372}
   blockPrefab: {fileID: 5919481123263140824, guid: 022a8199d19b4ac4bb19dfffc8d96487, type: 3}
-  timeBetweenWaves: 2
+  timeBetweenWaves: 1
 --- !u!4 &1851667008
 Transform:
   m_ObjectHideFlags: 0
