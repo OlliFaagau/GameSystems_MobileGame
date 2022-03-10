@@ -25,7 +25,7 @@ public class UI_Script : MonoBehaviour
 
     void Start()
     {
-        UnPause();
+        Pause();
         if(numOfPlays != GameManager.playerNum && clickCounter == 0)
         {
             numOfPlays = GameManager.playerNum;
