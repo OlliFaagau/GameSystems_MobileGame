@@ -12,6 +12,7 @@ public class DodgeMovement : MonoBehaviour
     public Slider healthBar;
     public Slider armorBar;
     public Image damageImage;
+    public AudioSource damageAudio;
 
     private Rigidbody2D rb;
     private bool damaged;
@@ -61,6 +62,7 @@ public class DodgeMovement : MonoBehaviour
         if (damaged)
         {
             damageImage.color = flashColour;
+            damageAudio.Play();
         }
         else
         {
@@ -86,9 +88,9 @@ public class DodgeMovement : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Block"))
         {
+            damaged = true;
             if (armor <= 0)
             {
-                damaged = true;
                 health -= 25;
             }
 
