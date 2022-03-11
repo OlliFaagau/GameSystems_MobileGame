@@ -89,7 +89,7 @@ public class UI_Script : MonoBehaviour
     void GameOver()
     {
         GameOverPanel.SetActive(true);
-        scoreText.text = "Your time: " + (int)time;
+        scoreText.text = "Your Score: " + (int)time;
         bonusText.text = "Bonus: " + GameManager.bonusPoints[GameManager.playerNum - numOfPlays];
         Pause();
     }
