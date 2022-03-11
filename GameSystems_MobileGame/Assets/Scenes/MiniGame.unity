@@ -1048,12 +1048,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.01
   mapWidth: 2.5
-  health: 100
-  armor: 0
   healthBar: {fileID: 1031028253}
   armorBar: {fileID: 1583455333}
   damageImage: {fileID: 481980172}
   damageAudio: {fileID: 299822371}
+  blockPrefab: {fileID: 5919481123263140824, guid: 022a8199d19b4ac4bb19dfffc8d96487, type: 3}
+  UI_Reference: {fileID: 1394680123}
 --- !u!212 &299822367
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2303,18 +2303,6 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 243825122}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 243825122}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -4845,10 +4833,8 @@ MonoBehaviour:
   - {fileID: 1970809446}
   - {fileID: 1208317876}
   - {fileID: 1791936602}
-  player: {fileID: 299822366}
   GameOverPanel: {fileID: 92255184}
   leaderBoard: {fileID: 1479459648}
-  blockPrefab: {fileID: 5919481123263140824, guid: 022a8199d19b4ac4bb19dfffc8d96487, type: 3}
   playerIcons:
   - {fileID: 363337599}
   - {fileID: 1079263225}

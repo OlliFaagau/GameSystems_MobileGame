@@ -15,6 +15,11 @@ public class ManageScenes : MonoBehaviour
         SceneManager.LoadScene("MiniGame");
     }
 
+    static  public void SwipeGame()
+    {
+        SceneManager.LoadScene("SwipingMiniGame");
+    }
+
     static public void MainMenu()
     {
         GameManager.playerNum = 0;

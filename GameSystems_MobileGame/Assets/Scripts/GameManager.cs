@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     static public bool canMove = false;
     static public int playerNum;
     static public int roundNum;
+    static public int health;
+    static public int armor;
 
     private void Awake()
     {

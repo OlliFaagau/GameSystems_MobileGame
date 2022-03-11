@@ -14,10 +14,8 @@ public class UI_Script : MonoBehaviour
     public Text bonusText;
     public Text playingPlayer;
     public Text[] placements;
-    public DodgeMovement player;
     public GameObject GameOverPanel;
     public GameObject leaderBoard;
-    public GameObject blockPrefab;
     public Image[] playerIcons;
 
     static public int numOfPlays = GameManager.playerNum;
@@ -57,14 +55,6 @@ public class UI_Script : MonoBehaviour
         {
             GameOver();
         }
-
-        if (timeLeft < 40)
-        {
-            blockPrefab.GetComponent<Rigidbody2D>().gravityScale = 1.0f;
-        }else if(timeLeft < 20)
-        {
-            blockPrefab.GetComponent<Rigidbody2D>().gravityScale = 1.5f;
-        }
     }
 
     public void Pause()
@@ -79,7 +69,7 @@ public class UI_Script : MonoBehaviour
     {
         if (GameOverPanel != null)
         {
-            if (player.health < 0) // show Game Over if player health hits 0
+            if (GameManager.health < 0) // show Game Over if player health hits 0
             {
                 GameOver();
             }
@@ -98,7 +88,7 @@ public class UI_Script : MonoBehaviour
     {
         if (leaderBoard != null)
         {
-            if (player.health < 0)
+            if (GameManager.health < 0)
             {
                 DisplayOrders();
                 GameOverPanel.SetActive(false);
