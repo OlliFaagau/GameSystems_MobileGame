@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     static public int roundNum;
     static public int health;
     static public int armor;
+    static public int altGamesNum = 0;
 
     private void Awake()
     {

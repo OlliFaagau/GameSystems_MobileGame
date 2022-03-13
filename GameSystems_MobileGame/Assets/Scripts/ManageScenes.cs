@@ -32,4 +32,17 @@ public class ManageScenes : MonoBehaviour
         Application.Quit();
     }
 
+    public void AlternateGames()
+    {
+        if(GameManager.altGamesNum == 0)
+        {
+            Minigame();
+            GameManager.altGamesNum++;
+        }
+        else
+        {
+            SwipeGame();
+            GameManager.altGamesNum = 0;
+        }
+    }
 }
