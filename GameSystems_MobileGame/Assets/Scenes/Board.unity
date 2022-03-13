@@ -3197,7 +3197,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 571070498}
         m_TargetAssemblyTypeName: ManageScenes, Assembly-CSharp
-        m_MethodName: Minigame
+        m_MethodName: SwipeGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
