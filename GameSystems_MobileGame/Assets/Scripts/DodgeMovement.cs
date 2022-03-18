@@ -21,6 +21,10 @@ public class DodgeMovement : MonoBehaviour
     private Touch touch;
     private Vector3 startPos;
 
+    private Vector2 currentPos;
+    private Vector2 deltaPos;
+    private Vector2 lastPos;
+
     Sprite sprite;
     Color color;
 
@@ -48,6 +52,10 @@ public class DodgeMovement : MonoBehaviour
     {
         healthBar.value = GameManager.health;
         armorBar.value = GameManager.armor;
+
+        currentPos = Input.mousePosition;
+        deltaPos = currentPos - lastPos;
+        lastPos = currentPos;
 
         Drag();
 
@@ -82,6 +90,11 @@ public class DodgeMovement : MonoBehaviour
 
     void Drag()
     {
+        if (Input.GetMouseButton(0))
+        {
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x + deltaPos.x * speed, startPos.x - mapWidth, startPos.x + mapWidth), transform.position.y, 0);
+        }
+
         if (Input.touchCount > 0)
         {
             touch = Input.GetTouch(0);
