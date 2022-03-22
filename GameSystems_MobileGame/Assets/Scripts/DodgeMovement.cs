@@ -13,17 +13,14 @@ public class DodgeMovement : MonoBehaviour
     public AudioSource damageAudio;
     public GameObject blockPrefab;
     public UI_Script UI_Reference;
+    public Camera cam;
 
     private Rigidbody2D rb;
     private bool damaged;
     private float flashSpeed = 5f;
     private Color flashColour = new Color(1f, 0f, 0f, 0.1f);
-    private Touch touch;
-    private Vector3 startPos;
-
-    private Vector2 currentPos;
-    private Vector2 deltaPos;
-    private Vector2 lastPos;
+    private float startXPos;
+    private bool isDragging = false;
 
     Sprite sprite;
     Color color;
@@ -35,7 +32,6 @@ public class DodgeMovement : MonoBehaviour
             UI_Script.numOfPlays = GameManager.playerNum;
         }
 
-        startPos = transform.position;
         GameManager.health = GameManager.healthPoints[GameManager.playerNum - UI_Script.numOfPlays];
         GameManager.armor = GameManager.armorPoints[GameManager.playerNum - UI_Script.numOfPlays];
         sprite = GameManager.sprites[GameManager.playerNum - UI_Script.numOfPlays];
@@ -53,19 +49,8 @@ public class DodgeMovement : MonoBehaviour
         healthBar.value = GameManager.health;
         armorBar.value = GameManager.armor;
 
-        currentPos = Input.mousePosition;
-        deltaPos = currentPos - lastPos;
-        lastPos = currentPos;
-
-        Drag();
-
-        float x = Input.GetAxis("Horizontal") * Time.fixedDeltaTime * speed;
-
-        Vector2 newPosition = rb.position + Vector2.right * x;
-
-        newPosition.x = Mathf.Clamp(newPosition.x, -mapWidth, mapWidth);
-
-        rb.MovePosition(newPosition);
+        if(isDragging)
+            Drag();
 
         if (damaged)
         {
@@ -80,30 +65,54 @@ public class DodgeMovement : MonoBehaviour
 
         if (UI_Reference.timeLeft < 40)
         {
-            blockPrefab.GetComponent<Rigidbody2D>().gravityScale = 1.0f;
+            blockPrefab.GetComponent<Rigidbody2D>().gravityScale = 1.2f;
         }
         else if (UI_Reference.timeLeft < 20)
         {
-            blockPrefab.GetComponent<Rigidbody2D>().gravityScale = 1.5f;
+            blockPrefab.GetComponent<Rigidbody2D>().gravityScale = 1.8f;
         }
     }
 
     void Drag()
     {
-        if (Input.GetMouseButton(0))
+        Vector3 mousePos = Input.mousePosition;
+
+        if (!cam.orthographic)
         {
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x + deltaPos.x * speed, startPos.x - mapWidth, startPos.x + mapWidth), transform.position.y, 0);
+            mousePos.z = 10;
         }
 
-        if (Input.touchCount > 0)
-        {
-            touch = Input.GetTouch(0);
+        mousePos = cam.ScreenToWorldPoint(mousePos);
 
-            if (touch.phase == TouchPhase.Moved)
-            {
-                transform.position = new Vector3(Mathf.Clamp(transform.position.x + touch.deltaPosition.x * speed, startPos.x - mapWidth, startPos.x + mapWidth), transform.position.y, 0);
-            }
+        if (transform.localPosition.x >= 2.5 || transform.localPosition.x <= -2.5)
+        {
+            transform.position = new Vector3(Mathf.Clamp(transform.localPosition.x - startXPos, startXPos - 2.5f, startXPos + 2.5f), transform.localPosition.y, transform.localPosition.z);
         }
+        else
+        {
+            transform.localPosition = new Vector3(mousePos.x - startXPos, transform.localPosition.y, transform.localPosition.z);
+        }
+    }
+
+    private void OnMouseDown()
+    {
+        Vector3 mousePos = Input.mousePosition;
+
+        if (!cam.orthographic)
+        {
+            mousePos.z = 10;
+        }
+
+        mousePos = cam.ScreenToWorldPoint(mousePos);
+
+        startXPos = mousePos.x - transform.localPosition.x;
+
+        isDragging = true;
+    }
+
+    private void OnMouseUp()
+    {
+        isDragging = false;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

@@ -1054,6 +1054,7 @@ MonoBehaviour:
   damageAudio: {fileID: 299822371}
   blockPrefab: {fileID: 5919481123263140824, guid: 022a8199d19b4ac4bb19dfffc8d96487, type: 3}
   UI_Reference: {fileID: 1394680123}
+  cam: {fileID: 519420031}
 --- !u!212 &299822367
 SpriteRenderer:
   m_ObjectHideFlags: 0
