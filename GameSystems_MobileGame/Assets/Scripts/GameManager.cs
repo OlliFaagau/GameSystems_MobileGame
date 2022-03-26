@@ -36,9 +36,4 @@ public class GameManager : MonoBehaviour
         healthPoints = new int[4];
     }
 
-  //void Update()
-  //{
-  //    
-  //}
-
 }

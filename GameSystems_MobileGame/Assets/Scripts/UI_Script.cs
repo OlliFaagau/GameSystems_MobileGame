@@ -21,6 +21,8 @@ public class UI_Script : MonoBehaviour
     static public int numOfPlays = GameManager.playerNum;
     static public int clickCounter = 0;
 
+    bool healthDeath = false;
+
     void Start()
     {
         Pause();
@@ -47,14 +49,7 @@ public class UI_Script : MonoBehaviour
         time += Time.deltaTime;
         timeText.text = $"{(int)timeLeft}";
 
-        if (numOfPlays > 0) 
-        {
-            GetGameOver();
-        }
-        if(timeLeft <= 0)
-        {
-            GameOver();
-        }
+        GetGameOver();
     }
 
     public void Pause()
@@ -69,7 +64,7 @@ public class UI_Script : MonoBehaviour
     {
         if (GameOverPanel != null)
         {
-            if (GameManager.health < 0) // show Game Over if player health hits 0
+            if (GameManager.health < 0 || timeLeft <= 0 || MatchingController.matches == 8) 
             {
                 GameOver();
             }
@@ -79,16 +74,35 @@ public class UI_Script : MonoBehaviour
     void GameOver()
     {
         GameOverPanel.SetActive(true);
-        scoreText.text = "Your Score: " + (int)time;
-        bonusText.text = "Bonus: " + GameManager.bonusPoints[GameManager.playerNum - numOfPlays];
-        Pause();
+        if (SceneManager.GetActiveScene().name != "MatchingGame")
+        {
+            scoreText.text = "Your Score: " + (int)time;
+            bonusText.text = "Bonus: " + GameManager.bonusPoints[GameManager.playerNum - numOfPlays];
+            Pause();
+        }
+        else
+        {
+            if (GameManager.health <= 0)
+            {
+                scoreText.text = "Your Score: " + MatchingController.matches;
+                bonusText.text = "Bonus: " + GameManager.bonusPoints[GameManager.playerNum - numOfPlays];
+                healthDeath = true;
+                Pause();
+            }
+            else
+            {
+                scoreText.text = "Your Score: " + ((int)MatchingController.points + MatchingController.matches);
+                bonusText.text = "Bonus: " + GameManager.bonusPoints[GameManager.playerNum - numOfPlays];
+                Pause();
+            }
+        }
     }
 
     void GetLeaderBoard()
     {
         if (leaderBoard != null)
         {
-            if (GameManager.health < 0)
+            if (GameManager.health < 0 || timeLeft <= 0 || MatchingController.matches == 8)
             {
                 DisplayOrders();
                 GameOverPanel.SetActive(false);
@@ -141,7 +155,22 @@ public class UI_Script : MonoBehaviour
     }
     public void Replay()
     {
-        GameManager.orders.Add(GameManager.playerNum - numOfPlays, (int)time + GameManager.bonusPoints[GameManager.playerNum - numOfPlays]);
+        if (SceneManager.GetActiveScene().name != "MatchingGame")
+        {
+            GameManager.orders.Add(GameManager.playerNum - numOfPlays, (int)time + GameManager.bonusPoints[GameManager.playerNum - numOfPlays]);
+        }
+        else
+        {
+            if (healthDeath)
+            {
+                GameManager.orders.Add(GameManager.playerNum - numOfPlays,  GameManager.bonusPoints[GameManager.playerNum - numOfPlays] + MatchingController.matches);
+                healthDeath = false;
+            }
+            else
+            {
+                GameManager.orders.Add(GameManager.playerNum - numOfPlays, (int)MatchingController.points + GameManager.bonusPoints[GameManager.playerNum - numOfPlays] + MatchingController.matches);
+            }
+        }
 
         numOfPlays--;
         clickCounter++;

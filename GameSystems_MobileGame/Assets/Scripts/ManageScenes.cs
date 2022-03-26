@@ -20,6 +20,11 @@ public class ManageScenes : MonoBehaviour
         SceneManager.LoadScene("SwipingMiniGame");
     }
 
+    static public void MatchGame()
+    {
+        SceneManager.LoadScene("MatchingGame");
+    }
+
     static public void MainMenu()
     {
         GameManager.playerNum = 0;
@@ -39,9 +44,14 @@ public class ManageScenes : MonoBehaviour
             Minigame();
             GameManager.altGamesNum++;
         }
-        else
+        else if(GameManager.altGamesNum == 1)
         {
             SwipeGame();
+            GameManager.altGamesNum++;
+        }
+        else
+        {
+            MatchGame();
             GameManager.altGamesNum = 0;
         }
     }

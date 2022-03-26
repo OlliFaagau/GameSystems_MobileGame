@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SwipingMiniGame.unity
     guid: 8b95ff377b9bc3f4b98b0a5b8c447ea3
+  - enabled: 1
+    path: Assets/Scenes/MatchingGame.unity
+    guid: 81cba6d1217330d4aa26daf6680b59aa
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
