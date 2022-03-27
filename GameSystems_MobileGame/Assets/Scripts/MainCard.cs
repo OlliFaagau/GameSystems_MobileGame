@@ -13,21 +13,24 @@ public class MainCard : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (matched == false)
+        if (Time.timeScale != 0)
         {
-            MatchingController controlScript = gameControl.GetComponent<MatchingController>();
-            if (spriteRenderer.sprite == back)
+            if (matched == false)
             {
-                if (controlScript.TokenUp(this))
+                MatchingController controlScript = gameControl.GetComponent<MatchingController>();
+                if (spriteRenderer.sprite == back)
                 {
-                    spriteRenderer.sprite = faces[faceIndex];
-                    controlScript.CheckTokens();
+                    if (controlScript.TokenUp(this))
+                    {
+                        spriteRenderer.sprite = faces[faceIndex];
+                        controlScript.CheckTokens();
+                    }
                 }
-            }
-            else
-            {
-                spriteRenderer.sprite = back;
-                controlScript.TokenDown(this);
+                else
+                {
+                    spriteRenderer.sprite = back;
+                    controlScript.TokenDown(this);
+                }
             }
         }
     }
