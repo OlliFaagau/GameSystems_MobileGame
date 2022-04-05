@@ -105,7 +105,7 @@ public class UI_Script : MonoBehaviour
             if (GameManager.health < 0 || timeLeft <= 0 || MatchingController.matches == 8)
             {
                 DisplayOrders();
-                GameOverPanel.SetActive(false);
+                Destroy(GameOverPanel);
                 leaderBoard.SetActive(true);
                 Pause();
             }
