@@ -34,10 +34,10 @@ public class ShieldScript : MonoBehaviour
 
     private bool CanAppend(Vector2 pos)
     {
-        if (renderer.positionCount == 0)
+        if (renderer.positionCount == 0)//allow line to grow
             return true;
 
-        if (renderer.positionCount > 20)
+        if (renderer.positionCount > 20)//stop appending line at certain length
             return false;
 
         return Vector2.Distance(renderer.GetPosition(renderer.positionCount - 1), pos)  > LineScript.RESOLUTION;
@@ -46,7 +46,7 @@ public class ShieldScript : MonoBehaviour
     void OnCollisionEnter2D(Collision2D col)
     {
         Debug.Log("Hit");
-        if (col.gameObject.CompareTag("Block"))
+        if (col.gameObject.CompareTag("Block"))//if obstacles collide with line -> destroy obstacle
         {
             Destroy(col.gameObject);
         }

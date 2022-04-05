@@ -7,36 +7,32 @@ public class LineScript : MonoBehaviour
 {
     public Slider healthBar;
     public Slider armorBar;
-    public Image damageImage;
-    public AudioSource damageAudio;
 
     [SerializeField] private ShieldScript linePrefab;
     private Camera cam;
     private ShieldScript currentLine;
     private ShieldScript previousLine;
     private float timeLeft = 3f;
-    private bool damaged;
-    private float flashSpeed = 5f;
-    private Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
     public const float RESOLUTION = 0.1f;
     void Start()
     {
         cam = Camera.main;
-        GameManager.health = GameManager.healthPoints[GameManager.playerNum - UI_Script.numOfPlays];
-        GameManager.armor = GameManager.armorPoints[GameManager.playerNum - UI_Script.numOfPlays];
-        gameObject.GetComponent<SpriteRenderer>().sprite = GameManager.sprites[GameManager.playerNum - UI_Script.numOfPlays];
-        gameObject.GetComponent<SpriteRenderer>().color = GameManager.colors[GameManager.playerNum - UI_Script.numOfPlays];
+        GameManager.health = GameManager.healthPoints[GameManager.playerNum - UI_Script.numOfPlays];     //Initialize health for player
+        GameManager.armor = GameManager.armorPoints[GameManager.playerNum - UI_Script.numOfPlays];      //Initialize armor for player
 
-        healthBar.maxValue = GameManager.health;
-        armorBar.maxValue = GameManager.armor;
+        gameObject.GetComponent<SpriteRenderer>().sprite = GameManager.sprites[GameManager.playerNum - UI_Script.numOfPlays];//Set up sprite for player
+        gameObject.GetComponent<SpriteRenderer>().color = GameManager.colors[GameManager.playerNum - UI_Script.numOfPlays];  //Set up color for player
+
+        healthBar.maxValue = GameManager.health;  //Set up health slider value
+        armorBar.maxValue = GameManager.armor;    //Set up armor slider values
     }
 
     void Update()
     {
         timeLeft -= Time.deltaTime;
-        healthBar.value = GameManager.health;
-        armorBar.value = GameManager.armor;
+        healthBar.value = GameManager.health;  //Updeate health slider
+        armorBar.value = GameManager.armor;   //Updeate armor slider
 
         if (previousLine != null)
         {
@@ -47,28 +43,21 @@ public class LineScript : MonoBehaviour
             }
         }
 
-         if (damaged)
+        if (Time.timeScale != 0)//only play if game is unpaused
         {
-            damageImage.color = flashColour;
-            damageAudio.Play();
+            SettingUpLines();
         }
-        else
-        {
-            damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
-        }
-        damaged = false;
-
-        SettingUpLines();
     }
 
     void SettingUpLines()
     {
         Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
         if (Input.GetMouseButtonDown(0))
         {
-            currentLine = Instantiate(linePrefab, mousePos, Quaternion.identity);
+            currentLine = Instantiate(linePrefab, mousePos, Quaternion.identity);//creating the line
 
-            if (previousLine != null)
+            if (previousLine != null)//check if you have a previous line and removes it
             {
                 Destroy(previousLine.gameObject);
             }
@@ -82,14 +71,15 @@ public class LineScript : MonoBehaviour
         {
             currentLine.SetPosition(mousePos);
         }
+        
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Block"))
+        if (collision.gameObject.CompareTag("Block"))//when player collides with obstacles ->  deal damage
         {
             Destroy(collision.gameObject);
-            damaged = true;
+            GameManager.damaged = true;
             if (GameManager.armor <= 0)
             {
                 GameManager.health -= 25;

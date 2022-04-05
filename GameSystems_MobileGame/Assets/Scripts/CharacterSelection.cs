@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 public class CharacterSelection : MonoBehaviour
 {
     public enum Characters { Square, Circle, Triangle, Diamond};
-    public Sprite[] characterPrefabs;
-    public Button[] charButtons;
+    public Sprite[] characterPrefabs;//character sprites
+    public Button[] charButtons;//the character buttons
     public Button startButton;
     public Slider armorSlider;
     public Slider healthSlider;
@@ -17,7 +17,7 @@ public class CharacterSelection : MonoBehaviour
 
     static public int numOfPressableButtons;
 
-    private int playerTracker;
+    private int playerTracker;//used as an index to keep track of the order in which the characters were chosen
 
     Scene currentScene;
     Characters pick;
@@ -26,7 +26,7 @@ public class CharacterSelection : MonoBehaviour
 
     void Start()
     {
-        currentScene = SceneManager.GetActiveScene();
+        currentScene = SceneManager.GetActiveScene();//get current scene
         playerText.text = $"Player {GameManager.playerNum + 1}";
         startButton.interactable = false;
         playerTracker = 0;
@@ -41,14 +41,14 @@ public class CharacterSelection : MonoBehaviour
     {
         if (currentScene.name == "MainMenu")
         {
-            if (numOfPressableButtons == 0 && playerTracker > 0)
+            if (numOfPressableButtons == 0 && playerTracker > 0)//check for pressable buttons 
             {
                 foreach (Button b in charButtons)
                 {
                     b.interactable = false;
                 }
                 playerText.text = "Let's get started!";
-                ManageScenes.Board();
+                ManageScenes.Board();//transition to game board
             }
             else
             {
@@ -63,15 +63,15 @@ public class CharacterSelection : MonoBehaviour
 
     void Pressed()
     {
-        numOfPressableButtons--;
+        numOfPressableButtons--;//decrease the amount of buttons left to be pressed
 
         if (numOfPressableButtons >= 0)
         {
-           GameManager.playerNum++;
+           GameManager.playerNum++;//increase the number of players
         }
     }
 
-    public void ResetButtons()
+    public void ResetButtons()//resets character selcetion
     {
         GameManager.playerNum = 0;
         playerTracker = 0;
@@ -84,7 +84,7 @@ public class CharacterSelection : MonoBehaviour
 
     public void CheckForOrder(Characters sprite, Color color)
     {
-        switch (playerTracker)
+        switch (playerTracker)//setting sprites and colors arrays that will be used for the characters
         {
             case 0:
                 GameManager.sprites[playerTracker]= characterPrefabs[(int)sprite];
@@ -110,7 +110,7 @@ public class CharacterSelection : MonoBehaviour
         }
     }
 
-    public void SetStats(Characters characters ,int tracker)
+    public void SetStats(Characters characters ,int tracker)//get character and the order it was chosen
     {
         switch ((int)characters)
         {
@@ -137,7 +137,7 @@ public class CharacterSelection : MonoBehaviour
         }
     }
 
-    void DisableButtons(int button)
+    void DisableButtons(int button)//disable chosen button from roster
     {
         switch (button)
         {
@@ -149,7 +149,7 @@ public class CharacterSelection : MonoBehaviour
                 break;
         }
     }
-    public void Square()
+    public void Square()//set square attributes
     {
         pick = Characters.Square;
         armorSlider.value = 5;
@@ -163,7 +163,7 @@ public class CharacterSelection : MonoBehaviour
         playerColor = new Color32(255, 0, 0, 255);
     }
 
-    public void Circle()
+    public void Circle()//set Circle attributes
     {
        pick = Characters.Circle;
         armorSlider.value = 3;
@@ -177,7 +177,7 @@ public class CharacterSelection : MonoBehaviour
         playerColor = new Color32(0, 255, 0, 255); ;
     }
 
-    public void Triangle()
+    public void Triangle()//set Triangle attributes
     {
         pick = Characters.Triangle;
         armorSlider.value = 7;
@@ -191,7 +191,7 @@ public class CharacterSelection : MonoBehaviour
         playerColor = new Color32(255, 255, 0, 255);
     }
 
-    public void Diamond()
+    public void Diamond()//set Diamond attributes
     {
         pick = Characters.Diamond;
         armorSlider.value = 10;
@@ -205,7 +205,7 @@ public class CharacterSelection : MonoBehaviour
         playerColor = new Color32(0, 0, 255, 255); ;
     }
 
-    public void ConfirmPick()
+    public void ConfirmPick()//confirm and disable character pick
     {
         DisableButtons(buttonIndex);
         Pressed();

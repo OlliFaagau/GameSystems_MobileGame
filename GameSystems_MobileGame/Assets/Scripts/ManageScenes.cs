@@ -37,7 +37,7 @@ public class ManageScenes : MonoBehaviour
         Application.Quit();
     }
 
-    public void AlternateGames()
+    public void AlternateGames()//manage minigame order
     {
         if(GameManager.altGamesNum == 0)
         {

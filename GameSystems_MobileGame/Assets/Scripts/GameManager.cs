@@ -6,18 +6,18 @@ public class GameManager : MonoBehaviour
 {
     static public Sprite[] sprites;
     static public Color[] colors;
-    static public Vector2[] movePlayers;
+    static public Vector2[] movePlayers;//used to set new positons that the players on the board will be moving to.
     static public int[] bonusPoints;
     static public int[] armorPoints;
     static public int[] healthPoints;
     static public Dictionary<int, int> orders = new Dictionary<int, int>(); //Helps save scores and get which players move on board
     static public int pM; //Player to Move Index
-    static public bool canMove = false;
     static public int playerNum;
     static public int roundNum;
     static public int health;
     static public int armor;
-    static public int altGamesNum = 0;
+    static public int altGamesNum = 0;//used to alternate between minigames -> (ManageScenes Script)
+    static public bool damaged = false;//used to detect damage
 
     private void Awake()
     {

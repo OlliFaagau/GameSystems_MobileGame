@@ -13,12 +13,12 @@ public class MainCard : MonoBehaviour
 
     public void OnMouseDown()
     {
-        if (Time.timeScale != 0)
+        if (Time.timeScale != 0)//only play if game is unpaused
         {
-            if (matched == false)
+            if (matched == false)//if this card isn't a part of a match -> make it flippable
             {
                 MatchingController controlScript = gameControl.GetComponent<MatchingController>();
-                if (spriteRenderer.sprite == back)
+                if (spriteRenderer.sprite == back)//if the back of the card is facing up -> flip it over to show face
                 {
                     if (controlScript.TokenUp(this))
                     {
@@ -26,7 +26,7 @@ public class MainCard : MonoBehaviour
                         controlScript.CheckTokens();
                     }
                 }
-                else
+                else//if the face of the card is up -> flip to the back
                 {
                     spriteRenderer.sprite = back;
                     controlScript.TokenDown(this);

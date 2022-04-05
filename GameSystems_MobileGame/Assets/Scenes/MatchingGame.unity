@@ -1731,8 +1731,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 921208872}
   armorBar: {fileID: 976917475}
-  damageImage: {fileID: 1231677093}
-  damageAudio: {fileID: 1478281578}
   player: {fileID: 1478281577}
   token: {fileID: 2352661960494480604, guid: 4a59fb1aba9d07a468dcda4947aec6ea, type: 3}
 --- !u!4 &449359619
@@ -1780,6 +1778,8 @@ MonoBehaviour:
   - {fileID: 1859404979}
   - {fileID: 790017906}
   - {fileID: 1239390013}
+  damageImage: {fileID: 1231677093}
+  damageAudio: {fileID: 1478281578}
 --- !u!82 &449359621
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2300,7 +2300,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.11998, y: -8}
-  m_SizeDelta: {x: 753.09, y: 80.85}
+  m_SizeDelta: {x: 725, y: 80.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &685403424
 MonoBehaviour:
@@ -3854,8 +3854,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.11999893, y: 150.71}
-  m_SizeDelta: {x: 653.09, y: 301.43}
+  m_AnchoredPosition: {x: 0, y: 150.71}
+  m_SizeDelta: {x: 630, y: 301.43}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1163664846
 MonoBehaviour:

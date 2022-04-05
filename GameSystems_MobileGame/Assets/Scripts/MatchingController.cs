@@ -7,51 +7,48 @@ public class MatchingController : MonoBehaviour
 {
     MainCard tokenUp1 = null;
     MainCard tokenUp2 = null;
-    List<int> faceIndexes = new List<int> { 0, 1, 2, 3, 0, 1, 2, 3, 4, 4, 5, 5, 6, 6, 7, 7 };
+    List<int> faceIndexes = new List<int> { 0, 1, 2, 3, 0, 1, 2, 3, 4, 4, 5, 5, 6, 6, 7, 7 }; //getting the indexes of all the cards and doubling them for matches
 
     public static System.Random rand = new System.Random();
-    public static float points = 30f;
-    public static int matches = 0;
+    public static float points;
+    public static int matches;
+
     public Slider healthBar;
     public Slider armorBar;
-    public Image damageImage;
-    public AudioSource damageAudio;
     public GameObject player;
 
     [SerializeField]
     private GameObject token;
     private int shuffleNum = 0;
-    private bool damaged = false;
-    private float flashSpeed = 5f;
-    private Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
     float tokenScale = 1;
     float yStart = 3.4f;
     float yChange = -2.2f;
-    int numOfTokens = 16;
+    int numOfTokens = 16;//number of cards on the board
 
     void StartGame()
     {
-        int startTokenCount = numOfTokens;
-        int row = 1;
-        float xPos = yStart;
-        float yPos = -2.2f;
-        float ortho = Camera.main.orthographicSize / 2.0f;
+        int startTokenCount = numOfTokens; 
+        int row = 1; //current row 
+        float yPos = yStart;
+        float xPos = -2.2f;
+        float ortho = Camera.main.orthographicSize / 2.0f; //for consistancy in size
 
-        for (int i = 1; i < startTokenCount + 1; i++)
+        for (int i = 1; i < startTokenCount + 1; i++)//go through deck and setting up 4 by 4 board
         {
-            shuffleNum = rand.Next(0, numOfTokens);
-            var temp = Instantiate(token, new Vector3(yPos, xPos, 0), Quaternion.identity);
-            temp.GetComponent<MainCard>().faceIndex = faceIndexes[shuffleNum];
-            temp.transform.localScale = new Vector3(ortho / tokenScale, ortho / tokenScale, 0);
-            faceIndexes.Remove(faceIndexes[shuffleNum]);
-            numOfTokens--;
-            yPos = yPos + 1.5f;
-            if (i % 4 < 1)
+            shuffleNum = rand.Next(0, numOfTokens);//for getting a random card
+            var temp = Instantiate(token, new Vector3(xPos, yPos, 0), Quaternion.identity);//spawning card in row
+            temp.GetComponent<MainCard>().faceIndex = faceIndexes[shuffleNum];//getting the face for the card 
+            temp.transform.localScale = new Vector3(ortho / tokenScale, ortho / tokenScale, 0);//setting the proper scale for the card
+            faceIndexes.Remove(faceIndexes[shuffleNum]);//remove this card from deck so it won't be repeated 
+            numOfTokens--;//subtract card total
+            xPos = xPos + 1.5f;
+
+            if (i % 4 < 1)//check if there are 4 cards in this row
             {
-                yPos = -2.2f;
-                xPos = xPos + yChange;
-                row++;
+                xPos = -2.2f;//reset x axis
+                yPos = yPos + yChange;//go to down and start new row
+                row++;//adding new row
             }
         }
     }
@@ -87,7 +84,7 @@ public class MatchingController : MonoBehaviour
 
     public void CheckTokens()
     {
-        if (tokenUp1 != null && tokenUp2 != null && tokenUp1.faceIndex == tokenUp2.faceIndex)
+        if (tokenUp1 != null && tokenUp2 != null && tokenUp1.faceIndex == tokenUp2.faceIndex)//check for match
         {
             tokenUp1.matched = true;
             tokenUp2.matched = true;
@@ -95,9 +92,10 @@ public class MatchingController : MonoBehaviour
             tokenUp2 = null;
             matches++;
         }
-        else if(tokenUp1 != null && tokenUp2 != null && tokenUp1.faceIndex != tokenUp2.faceIndex)
+        else if(tokenUp1 != null && tokenUp2 != null && tokenUp1.faceIndex != tokenUp2.faceIndex)//check for mismatch
         {
-            damaged = true;
+            //if cards are not a match apply damage
+            GameManager.damaged = true;
             if (GameManager.armor <= 0)
             {
                 GameManager.health -= 25;
@@ -107,42 +105,27 @@ public class MatchingController : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        StartGame();
-    }
-
     private void Start()
     {
-        GameManager.health = GameManager.healthPoints[GameManager.playerNum - UI_Script.numOfPlays];
-        GameManager.armor = GameManager.armorPoints[GameManager.playerNum - UI_Script.numOfPlays];
+        StartGame();
+        GameManager.health = GameManager.healthPoints[GameManager.playerNum - UI_Script.numOfPlays];  //Initialize health for player
+        GameManager.armor = GameManager.armorPoints[GameManager.playerNum - UI_Script.numOfPlays];   //Initialize armor for player
+    
+        player.GetComponent<SpriteRenderer>().sprite = GameManager.sprites[GameManager.playerNum - UI_Script.numOfPlays];   //Set up sprite for player
+        player.GetComponent<SpriteRenderer>().color = GameManager.colors[GameManager.playerNum - UI_Script.numOfPlays];     //Set up color for player
+    
+        healthBar.maxValue = GameManager.health;//Set up health slider value
+        armorBar.maxValue = GameManager.armor;  //Set up armor slider values
 
-        player.GetComponent<SpriteRenderer>().sprite = GameManager.sprites[GameManager.playerNum - UI_Script.numOfPlays];
-        player.GetComponent<SpriteRenderer>().color = GameManager.colors[GameManager.playerNum - UI_Script.numOfPlays];
-
-        healthBar.value = GameManager.health;
-        armorBar.value = GameManager.armor;
-
-        points = 30f;
-        matches = 0;
+        points = 30f;//Game starts with 30 possible points
+        matches = 0;//number of pairs matched
     }
 
     private void Update()
     {
-        healthBar.value = GameManager.health;
-        armorBar.value = GameManager.armor;
+        healthBar.value = GameManager.health;    //Updeate health slider
+        armorBar.value = GameManager.armor;     //Updeate armor slider
 
-        points -= Time.deltaTime;
-
-        if (damaged)
-        {
-            damageImage.color = flashColour;
-            damageAudio.Play();
-        }
-        else
-        {
-            damageImage.color = Color.Lerp(damageImage.color, Color.clear, flashSpeed * Time.deltaTime);
-        }
-        damaged = false;
+        points -= Time.deltaTime; //points decreases as time runs out
     }
 }
