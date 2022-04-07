@@ -25,6 +25,7 @@ public class UI_Script : MonoBehaviour
 
     private float flashSpeed = 5f;
     private Color flashColour = new Color(1f, 0f, 0f, 0.1f);
+    private Button pauseButton;
 
     void Start()
     {
@@ -39,6 +40,7 @@ public class UI_Script : MonoBehaviour
         leaderBoard.SetActive(false);
         playingPlayer.text = $"Player {(GameManager.playerNum - numOfPlays) + 1}";
         playingPlayer.color = GameManager.colors[GameManager.playerNum - numOfPlays];
+        pauseButton = GameObject.Find("PauseButton").GetComponent<Button>();
 
         foreach(Image image in playerIcons)//hide the player icons on the leaderboard 
         {
@@ -51,6 +53,15 @@ public class UI_Script : MonoBehaviour
         timeLeft -= Time.deltaTime;
         time += Time.deltaTime;
         timeText.text = $"{(int)timeLeft}";
+
+        if(Time.timeScale != 1)//disable pause button at the beginning of minigames
+        {
+            pauseButton.enabled = false;
+        }
+        else
+        {
+            pauseButton.enabled = true;
+        }
 
         if (GameManager.damaged)
         {
