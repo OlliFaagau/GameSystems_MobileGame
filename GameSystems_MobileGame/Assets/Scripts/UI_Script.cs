@@ -103,6 +103,11 @@ public class UI_Script : MonoBehaviour
         //death conditions for different minigames
         if (SceneManager.GetActiveScene().name != "MatchingGame") //For dodge and swipe minigames
         {
+            if(SceneManager.GetActiveScene().name == "SwipingMiniGame")
+            {
+                Destroy(GameObject.Find("Line(Clone)"));
+            }
+
             scoreText.text = "Your Score: " + (int)time;
             bonusText.text = "Bonus: " + GameManager.bonusPoints[GameManager.playerNum - numOfPlays];
             Pause();
@@ -125,7 +130,7 @@ public class UI_Script : MonoBehaviour
     {
         if (leaderBoard != null)
         {
-            if (GameManager.health < 0 || timeLeft <= 0 || MatchingController.matches == 8)
+            if (GameManager.health <= 0 || timeLeft <= 0 || MatchingController.matches == 8)
             {
                 DisplayOrders();//initialize leaderboard
                 Destroy(GameOverPanel);//remove game ove rpanel
@@ -188,7 +193,6 @@ public class UI_Script : MonoBehaviour
         else//save scores for matching minigame
         {
             //add the time left over(points) with the player bonus and the amount of matches made
-            Debug.Log("" + (int)MatchingController.points + GameManager.bonusPoints[GameManager.playerNum - numOfPlays] + MatchingController.matches);
             GameManager.orders.Add(GameManager.playerNum - numOfPlays, (int)MatchingController.points + GameManager.bonusPoints[GameManager.playerNum - numOfPlays] + MatchingController.matches);
         }
 
