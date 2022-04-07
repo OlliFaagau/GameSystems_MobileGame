@@ -29,6 +29,7 @@ public class ManageScenes : MonoBehaviour
     static public void MainMenu()
     {
         GameManager.playerNum = 0;
+        UI_Script.clickCounter = 0;
         GameManager.movePlayers = new Vector2[4];
         SceneManager.LoadScene("MainMenu");
     }

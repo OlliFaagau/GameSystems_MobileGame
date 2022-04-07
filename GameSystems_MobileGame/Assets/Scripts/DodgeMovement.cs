@@ -18,16 +18,11 @@ public class DodgeMovement : MonoBehaviour
 
     void Start()
     {
-        if (UI_Script.numOfPlays != GameManager.playerNum && UI_Script.clickCounter == 0)
-        {
-            UI_Script.numOfPlays = GameManager.playerNum;
-        }
+        GameManager.health = GameManager.healthPoints[GameManager.playerNum -GameManager.numOfPlays];  //Initialize health for player
+        GameManager.armor = GameManager.armorPoints[GameManager.playerNum - GameManager.numOfPlays];   //Initialize armor for player
 
-        GameManager.health = GameManager.healthPoints[GameManager.playerNum - UI_Script.numOfPlays];  //Initialize health for player
-        GameManager.armor = GameManager.armorPoints[GameManager.playerNum - UI_Script.numOfPlays];   //Initialize armor for player
-
-        gameObject.GetComponent<SpriteRenderer>().sprite =  GameManager.sprites[GameManager.playerNum - UI_Script.numOfPlays];  //Set up sprite for player
-        gameObject.GetComponent<SpriteRenderer>().color = GameManager.colors[GameManager.playerNum - UI_Script.numOfPlays];    //Set up color for player
+        gameObject.GetComponent<SpriteRenderer>().sprite =  GameManager.sprites[GameManager.playerNum - GameManager.numOfPlays];  //Set up sprite for player
+        gameObject.GetComponent<SpriteRenderer>().color = GameManager.colors[GameManager.playerNum - GameManager.numOfPlays];    //Set up color for player
 
         healthBar.maxValue = GameManager.health;   //Set up health slider value
         armorBar.maxValue = GameManager.armor;     //Set up armor slider values

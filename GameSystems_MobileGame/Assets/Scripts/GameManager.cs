@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     static public Dictionary<int, int> orders = new Dictionary<int, int>(); //Helps save scores and get which players move on board
     static public int pM; //Player to Move Index
     static public int playerNum;
+    static public int numOfPlays;//keep track of the number of times the game needs to be replyed
     static public int roundNum;
     static public int health;
     static public int armor;
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         playerNum = 0;
+        numOfPlays = 0;
         roundNum = 1;
         movePlayers = new Vector2[4];
         colors = new Color[4];
@@ -34,6 +36,11 @@ public class GameManager : MonoBehaviour
         bonusPoints = new int[4];
         armorPoints = new int[4];
         healthPoints = new int[4];
+    }
+
+    private void Update()
+    {
+        Debug.Log("Number of players - " + playerNum);
     }
 
 }

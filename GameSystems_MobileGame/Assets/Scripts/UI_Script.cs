@@ -20,26 +20,29 @@ public class UI_Script : MonoBehaviour
     public Image damageImage;
     public AudioSource damageAudio;
 
-    static public int numOfPlays = GameManager.playerNum;//keep track of the number of times the game needs to be replyed
     static public int clickCounter = 0;//used to keep track of times the continue button has been clicked
 
     private float flashSpeed = 5f;
     private Color flashColour = new Color(1f, 0f, 0f, 0.1f);
     private Button pauseButton;
 
+    private void Awake()
+    {
+        if (GameManager.numOfPlays != GameManager.playerNum && clickCounter == 0)
+        {
+            GameManager.numOfPlays = GameManager.playerNum;
+        }
+    }
+
     void Start()
     {
         Pause();
-        if(numOfPlays != GameManager.playerNum && clickCounter == 0)
-        {
-            numOfPlays = GameManager.playerNum;
-        }
 
         timeText.text = $"{(int)timeLeft}";
         GameOverPanel.SetActive(false);
         leaderBoard.SetActive(false);
-        playingPlayer.text = $"Player {(GameManager.playerNum - numOfPlays) + 1}";
-        playingPlayer.color = GameManager.colors[GameManager.playerNum - numOfPlays];
+        playingPlayer.text = $"Player {(GameManager.playerNum - GameManager.numOfPlays) + 1}";
+        playingPlayer.color = GameManager.colors[GameManager.playerNum - GameManager.numOfPlays];
         pauseButton = GameObject.Find("PauseButton").GetComponent<Button>();
 
         foreach(Image image in playerIcons)//hide the player icons on the leaderboard 
@@ -109,7 +112,7 @@ public class UI_Script : MonoBehaviour
             }
 
             scoreText.text = "Your Score: " + (int)time;
-            bonusText.text = "Bonus: " + GameManager.bonusPoints[GameManager.playerNum - numOfPlays];
+            bonusText.text = "Bonus: " + GameManager.bonusPoints[GameManager.playerNum - GameManager.numOfPlays];
             Pause();
         }
         else//for matching minigame
@@ -121,7 +124,7 @@ public class UI_Script : MonoBehaviour
             }
 
             scoreText.text = "Your Score: " + ((int)MatchingController.points + MatchingController.matches);
-            bonusText.text = "Bonus: " + GameManager.bonusPoints[GameManager.playerNum - numOfPlays];
+            bonusText.text = "Bonus: " + GameManager.bonusPoints[GameManager.playerNum - GameManager.numOfPlays];
             Pause();;
         }
     }
@@ -188,25 +191,25 @@ public class UI_Script : MonoBehaviour
         if (SceneManager.GetActiveScene().name != "MatchingGame") //save scores for dodge and swipe minigames
         {
             //add the time survived with the player bonus
-            GameManager.orders.Add(GameManager.playerNum - numOfPlays, (int)time + GameManager.bonusPoints[GameManager.playerNum - numOfPlays]);
+            GameManager.orders.Add(GameManager.playerNum - GameManager.numOfPlays, (int)time + GameManager.bonusPoints[GameManager.playerNum - GameManager.numOfPlays]);
         }
         else//save scores for matching minigame
         {
             //add the time left over(points) with the player bonus and the amount of matches made
-            GameManager.orders.Add(GameManager.playerNum - numOfPlays, (int)MatchingController.points + GameManager.bonusPoints[GameManager.playerNum - numOfPlays] + MatchingController.matches);
+            GameManager.orders.Add(GameManager.playerNum - GameManager.numOfPlays, (int)MatchingController.points + GameManager.bonusPoints[GameManager.playerNum - GameManager.numOfPlays] + MatchingController.matches);
         }
 
-        numOfPlays--;//decrease the number of times left to replay the minigame
+        GameManager.numOfPlays--;//decrease the number of times left to replay the minigame
         clickCounter++;//add a click
 
-        if (numOfPlays > 0)//if there are still players that need their turn replay minigame
+        if (GameManager.numOfPlays > 0)//if there are still players that need their turn replay minigame
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         else//if there are no more players in que get the ranking leaderboard
         {
             GetLeaderBoard();
-            numOfPlays = GameManager.playerNum;//reset the number of plays for the next minigame
+            GameManager.numOfPlays = GameManager.playerNum;//reset the number of plays for the next minigame
             clickCounter = 0;
             GameManager.roundNum++;//used to change the round text in the board scene
         }
