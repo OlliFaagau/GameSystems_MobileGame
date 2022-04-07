@@ -8,6 +8,7 @@ public class ManageScenes : MonoBehaviour
     static public void Board()
     { 
         SceneManager.LoadScene("Board");
+        MatchingController.matches = 0;
     }
 
     static public void Minigame()
