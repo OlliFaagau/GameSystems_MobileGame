@@ -8,8 +8,8 @@ public class SpawnOnBoard : MonoBehaviour
     public GameObject[] players;
     public LineRenderer[] lines;//used for the trails behind the player sprites
     public GameObject winnerPanel;
-    public GameObject realBoard;
-    public GameObject canvasBoard;
+    public GameObject realBoard;//the track
+    public GameObject canvasBoard;//the UI elements
     public Image winner;
     public Button playButton;
     public Button pauseButton;
@@ -44,13 +44,13 @@ public class SpawnOnBoard : MonoBehaviour
             lines[i].startColor = players[i].GetComponent<SpriteRenderer>().color;
             lines[i].endColor = players[i].GetComponent<SpriteRenderer>().color;
 
-            if(GameManager.roundNum > 3)
+            if(GameManager.movePlayers[i].y >= 9.9f)
             {
                 playButton.enabled = false;
                 pauseButton.enabled = false;
             }
 
-            if (players[i].transform.position.y >= 9.9 && victor == 0)//if player reaches this position they win
+            if (players[i].transform.position.y >= 9.9f && victor == 0)//if player reaches this position they win
             {
                 SetWinnerPanel(i);
             }
@@ -83,7 +83,6 @@ public class SpawnOnBoard : MonoBehaviour
         winner.color = players[playerIndex].GetComponent<SpriteRenderer>().color;
         realBoard.SetActive(false);
         canvasBoard.SetActive(false);
-        playButton.enabled = false;
         victor = 1;//ensures that the first player to cross wins
     }
 
