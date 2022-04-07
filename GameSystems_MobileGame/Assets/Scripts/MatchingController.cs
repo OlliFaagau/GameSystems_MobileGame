@@ -107,6 +107,11 @@ public class MatchingController : MonoBehaviour
 
     private void Start()
     {
+        if (UI_Script.numOfPlays != GameManager.playerNum && UI_Script.clickCounter == 0)
+        {
+            UI_Script.numOfPlays = GameManager.playerNum;
+        }
+
         StartGame();
         GameManager.health = GameManager.healthPoints[GameManager.playerNum - UI_Script.numOfPlays];  //Initialize health for player
         GameManager.armor = GameManager.armorPoints[GameManager.playerNum - UI_Script.numOfPlays];   //Initialize armor for player

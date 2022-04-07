@@ -17,6 +17,11 @@ public class LineScript : MonoBehaviour
     public const float RESOLUTION = 0.1f;
     void Start()
     {
+        if (UI_Script.numOfPlays != GameManager.playerNum && UI_Script.clickCounter == 0)
+        {
+            UI_Script.numOfPlays = GameManager.playerNum;
+        }
+
         cam = Camera.main;
         GameManager.health = GameManager.healthPoints[GameManager.playerNum - UI_Script.numOfPlays];     //Initialize health for player
         GameManager.armor = GameManager.armorPoints[GameManager.playerNum - UI_Script.numOfPlays];      //Initialize armor for player
