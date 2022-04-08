@@ -60,15 +60,11 @@ public class DodgeMovement : MonoBehaviour
         }
 
         mousePos = cam.ScreenToWorldPoint(mousePos);
+        mousePos.x = Mathf.Clamp(mousePos.x, -2.5f, 2.5f);
 
-        if (transform.localPosition.x >= 2.5 || transform.localPosition.x <= -2.5)//check if player is heading off of the screen
-        {
-            transform.position = new Vector3(Mathf.Clamp(transform.localPosition.x - startXPos, startXPos - 2.5f, startXPos + 2.5f), transform.localPosition.y, transform.localPosition.z);//keep player inbounds
-        }
-        else//else move as usual
-        {
-            transform.localPosition = new Vector3(mousePos.x - startXPos, transform.localPosition.y, transform.localPosition.z);
-        }
+        transform.localPosition = new Vector3(mousePos.x - startXPos, transform.localPosition.y, transform.localPosition.z);//keep player inbounds
+
+        Debug.Log(transform.localPosition);
     }
 
     private void OnMouseDown()
