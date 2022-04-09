@@ -15,11 +15,6 @@ public class ShieldScript : MonoBehaviour
         collider.transform.position -= transform.position;
     }
 
-    void Update()
-    {
-        Debug.Log(renderer.positionCount);
-    }
-
     public void SetPosition(Vector2 pos)
     {
         if (!CanAppend(pos))
@@ -45,7 +40,6 @@ public class ShieldScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        Debug.Log("Hit");
         if (col.gameObject.CompareTag("Block"))//if obstacles collide with line -> destroy obstacle
         {
             Destroy(col.gameObject);
