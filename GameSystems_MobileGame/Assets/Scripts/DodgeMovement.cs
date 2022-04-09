@@ -63,8 +63,6 @@ public class DodgeMovement : MonoBehaviour
         mousePos.x = Mathf.Clamp(mousePos.x, -2.5f, 2.5f);
 
         transform.localPosition = new Vector3(mousePos.x - startXPos, transform.localPosition.y, transform.localPosition.z);//keep player inbounds
-
-        Debug.Log(transform.localPosition);
     }
 
     private void OnMouseDown()

@@ -12,7 +12,7 @@ public class LineScript : MonoBehaviour
     private Camera cam;
     private ShieldScript currentLine;
     private ShieldScript previousLine;
-    private float timeLeft = 3f;
+    private float timeLeft = 5f;
 
     public const float RESOLUTION = 0.1f;
     void Start()
@@ -61,6 +61,7 @@ public class LineScript : MonoBehaviour
             {
                 Destroy(previousLine.gameObject);
             }
+
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -69,7 +70,15 @@ public class LineScript : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            currentLine.SetPosition(mousePos);
+            if (currentLine != null)
+            {
+                currentLine.SetPosition(mousePos);
+                if (timeLeft <= 0)
+                {
+                    timeLeft = 5f;
+                    Destroy(currentLine.gameObject);
+                }
+            }
         }
         
     }

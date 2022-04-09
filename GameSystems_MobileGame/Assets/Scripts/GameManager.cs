@@ -38,9 +38,4 @@ public class GameManager : MonoBehaviour
         healthPoints = new int[4];
     }
 
-    private void Update()
-    {
-        Debug.Log("Number of players - " + playerNum);
-    }
-
 }
